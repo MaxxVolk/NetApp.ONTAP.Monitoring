@@ -1,0 +1,110 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.DataSource" Accessibility="Internal" Batching="false">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="0" name="FilterName" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="FilterName" Selector="$Config/FilterName$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_ReadEvents" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.ProbeAction">
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+                <FilterName>$Config/FilterName$</FilterName>
+                <ReadIntervalSeconds>$Config/IntervalSeconds$</ReadIntervalSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_ReadEvents">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Rules>
+      <Rule ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.Rule" Enabled="false" Target="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"
+            ConfirmDelivery="false" Priority="Normal" Remotable="true" DiscardLevel="100">
+        <Category>Alert</Category>
+        <DataSources>
+          <DataSource ID="DS_ReadEvents" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.DataSource">
+            <IntervalSeconds>600</IntervalSeconds>
+            <SyncTime />
+            <ConnectionFQDN>$Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$</ConnectionFQDN>
+            <username>$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$</username>
+            <password>$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$</password>
+            <FilterName />
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WA_CreateAlert" TypeID="Health!System.Health.GenerateAlert">
+            <Priority>$Data/Property[@Name='Priority']$</Priority>
+            <Severity>$Data/Property[@Name='Severity']$</Severity>
+            <AlertMessageId>$MPElement[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.Rule.AlertMessage"]$</AlertMessageId>
+            <AlertParameters>
+              <AlertParameter1>$Data/Property[@Name='EventDescription']$</AlertParameter1>
+              <AlertParameter2>$Data/Property[@Name='Source']$</AlertParameter2>
+              <AlertParameter3>$Data/Property[@Name='Node']$</AlertParameter3>
+              <AlertParameter4>$Data/Property[@Name='SuppressionCount']$</AlertParameter4>
+              <AlertParameter5>$Data/Property[@Name='Parameters']$</AlertParameter5>
+              <AlertParameter6>$Data/Property[@Name='TimeUTC']$</AlertParameter6>
+              <AlertParameter7>$Data/Property[@Name='TimeLocal']$</AlertParameter7>
+              <AlertParameter8>$Data/Property[@Name='EventName']$</AlertParameter8>
+            </AlertParameters>
+          </WriteAction>
+        </WriteActions>
+      </Rule>
+    </Rules>
+  </Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.Rule.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.Rule">
+          <Name>NetApp ONTAP Cluster Events Rule</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.Rule.AlertMessage">
+          <Name>NetApp ONTAP Event Alert</Name>
+          <Description>Event: {0}
+was triggered at the {2} node from the {1} source.
+
+Event suppression counter: {3}
+
+Data supplied with the event:
+{4}
+
+Alert trigger time:
+{5} UTC
+{6} Local
+
+Subject replacement: {7}
+          </Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

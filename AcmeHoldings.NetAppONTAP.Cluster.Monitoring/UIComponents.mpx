@@ -1,0 +1,46 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Categories>
+    <Category ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.WPF.Category" Target="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Control.Assembly"
+              Value="Visualization!Microsoft.SystemCenter.Visualization.WpfComponentAssembly" />
+  </Categories>
+  <Presentation>
+    <ComponentTypes>
+      <ComponentType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterSeed.Component" Accessibility="Public" />
+      <ComponentType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.Component" Accessibility="Public" />
+    </ComponentTypes>
+    <ComponentReferences>
+      <ComponentReference ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.ComponentReference"
+                          Accessibility="Public" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.Component"
+                          Parent="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Root.Folder"/>
+    </ComponentReferences>
+    <ComponentImplementations>
+      <ComponentImplementation ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterSeed.ComponentImplementation"
+                               Accessibility="Public" Platform="Wpf"
+                               TypeId="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterSeed.Component">
+        <Unit>
+          <ContractFactory>AcmeHoldings.NetAppONTAP.Cluster.Control.ONTAPClusterSeed</ContractFactory>
+        </Unit>
+      </ComponentImplementation>
+      <ComponentImplementation ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.ComponentImplementation"
+                               Accessibility="Public" Platform="All"
+                               TypeId="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.Component">
+        <Composite>
+          <Component TypeId="Visualization!Microsoft.SystemCenter.Visualization.ComponentContainer">
+            <Binding PropertyId="Visual">
+              <Component TypeId="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterSeed.Component" />
+            </Binding>
+          </Component>
+        </Composite>
+      </ComponentImplementation>
+    </ComponentImplementations>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ONTAPClusterDashboard.Component">
+          <Name>Manage ONTAP Cluster Appliance Seeds</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

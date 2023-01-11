@@ -1,0 +1,170 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instancebc53478ce29746bdb89db7a134476159" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.AggrSize.MBSizeFree.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootAggregates&gt;true&lt;/ExcludeRootAggregates&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;MBFreeWarning&gt;100000&lt;/MBFreeWarning&gt;&lt;MBFreeCritical&gt;50000&lt;/MBFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.AggregateUsage.AggregateMonitor</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Aggregate.MBUsed.Monitor</Id>
+        <DisplayName>Aggregate Usage MB Monitor</DisplayName>
+        <Description>Alerts if free space in MB is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Aggregate Free Space MB Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Name$ aggregate hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster is running low on free space (MB).
+
+Amount of free space left at the time when this alert was triggered: $Data/Context/Property[@Name='Format_Free']$
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='Format_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance914f4e6d6a054bc0b014b392436b2d91" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.AggregateMonitor" Version="1.0.0.0">
+      <AggregateMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>WorstOf</Algorithm>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>AggregateUsage.AggregateMonitor</Id>
+        <DisplayName>Aggregate Free Space Aggregate Monitor</DisplayName>
+        <Description>Roll-up for percent and absolute value usage monitoris.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </AggregateMonitorConfig>
+    </Instance>
+    <Instance ID="Instanceeb3dad756ddb425e9138af117fdbefba" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.AggrSize.PercentageFreeCritical.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootAggregates&gt;true&lt;/ExcludeRootAggregates&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentFreeCritical&gt;10&lt;/PercentFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Aggregate.PercentUsedCritical.Monitor</Id>
+        <DisplayName>Critical Aggregate Usage Percent Monitor</DisplayName>
+        <Description>Triggers a high priority critical alerts if free space in percent is below the absolute minimum threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>StateCollection</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>Error</AlertSeverity>
+        <AlertName>Clustered ONTAP Aggregate Free Space % Critical Low</AlertName>
+        <AlertDescription>Aggregate free space is critically low for the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Name$ aggregate hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster. This may cause serious performance degradation.
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='Format_PercentageSizeFree']$%
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='Format_PercentageSizeFree']$
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance088116b5b34d4fb194423cd6cc758ca4" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.AggrSize.PercentageSizeFree.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootAggregates&gt;true&lt;/ExcludeRootAggregates&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentFreeWarning&gt;20&lt;/PercentFreeWarning&gt;&lt;PercentFreeCritical&gt;10&lt;/PercentFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.AggregateUsage.AggregateMonitor</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Aggregate.PercentUsed.Monitor</Id>
+        <DisplayName>Aggregate Usage Percent Monitor</DisplayName>
+        <Description>Alerts if free space in percent is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Aggregate Free Space % Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Name$ aggregate hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster is running low on free space (percent).
+
+Amount of free space left at the time when this alert was triggered: $Data/Context/Property[@Name='Format_PercentageSizeFree']$%
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='Format_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

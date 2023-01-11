@@ -1,0 +1,594 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeSpaceCriticalLow.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootVolumes&gt;true&lt;/ExcludeRootVolumes&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;FreeMBCritical&gt;100&lt;/FreeMBCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.FreeSpaceCriticalLow.Monitor</Id>
+        <DisplayName>Volume Free Space Critically Low Monitor</DisplayName>
+        <Description>Triggers hight priority alert if free space in MB is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>StateCollection</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Free Space Critically Low</AlertName>
+        <AlertDescription>Free space left on the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is critically low and may cause deny of service.
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='Format_Free']$
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance148a4a51e71640a2a3b5a57165ecf84f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.AggregateMonitor" Version="1.0.0.0">
+      <AggregateMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>WorstOf</Algorithm>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>VolumeUsage.AggregateMonitor</Id>
+        <DisplayName>Volume Free Space Aggregate Monitor</DisplayName>
+        <Description>Description for new aggregate monitor.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </AggregateMonitorConfig>
+    </Instance>
+    <Instance ID="Instanceaae4518ad8b54c489232d63702d6b6a2" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.AutoGrowLimit.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentGrownWarning&gt;93&lt;/PercentGrownWarning&gt;&lt;PercentGrownCritical&gt;98&lt;/PercentGrownCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>VolumeSize.AutoGrowLimit.Monitor</Id>
+        <DisplayName>Volume Auto-Grow Limit Monitor</DisplayName>
+        <Description>Alerts if the volume is exhausting its auto-grow limit or unable to grow anymore.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Auto-Grow Limit Exhausted</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM is about to reach its auto-grow limit. Once reached, the volume will no longer automatically expand when it runs out of space.
+
+Volume details:
+Total size: $Data/Context/Property[@Name='Format_Size']$
+Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+Free space: $Data/Context/Property[@Name='Format_Free']$
+Max grow size: $Data/Context/Property[@Name='Format_MaxGrowSize']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance682f320b80e54e4091e1a6c55ec7c31f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Stressed.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;VolumeSizeMB&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/SizeMB$&lt;/VolumeSizeMB&gt;&lt;IOPSperTBLimit&gt;400&lt;/IOPSperTBLimit&gt;&lt;RWRatioLimit&gt;70&lt;/RWRatioLimit&gt;&lt;ResponseTime_microsec&gt;10000&lt;/ResponseTime_microsec&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Stressed</OperationalStateId>
+            <OperationalStateDisplayName>Stressed</OperationalStateDisplayName>
+            <MonitorTypeStateId>Stressed</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Breached</OperationalStateId>
+            <OperationalStateDisplayName>Breached</OperationalStateDisplayName>
+            <MonitorTypeStateId>Breached</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.Performance.Monitor</Id>
+        <DisplayName>Volume Performance Monitor</DisplayName>
+        <Description>Volume Performance Monitor.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Performance Stressed</AlertName>
+        <AlertDescription>Volume performance stressed.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance68863d1a96634061bad756d595cbfec5" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;VolumeSizeMB&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/SizeMB$&lt;/VolumeSizeMB&gt;&lt;IOPSperTBLimit&gt;400&lt;/IOPSperTBLimit&gt;&lt;RWRatioLimit&gt;70&lt;/RWRatioLimit&gt;&lt;ResponseTime_microsec&gt;10000&lt;/ResponseTime_microsec&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Breached</OperationalStateId>
+            <OperationalStateDisplayName>Breached</OperationalStateDisplayName>
+            <MonitorTypeStateId>Breached</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.SLA.Monitor</Id>
+        <DisplayName>Volume SLA Monitor</DisplayName>
+        <Description>Volume SLA Monitor.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>Error</AlertSeverity>
+        <AlertName>Volume SLA Breached</AlertName>
+        <AlertDescription>Volume SLA breached.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instanced05764c649e44f5a8bb642357c6cf3b1" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;StateField&gt;VolumeInCutover&lt;/StateField&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.State.VolumeInCutover.Monitor</Id>
+        <DisplayName>Volume In Cutover State Monitor</DisplayName>
+        <Description>Monitors volume state: VolumeInCutover.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume State: Volume In Cutover</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is in cut-over state.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancef5cc7e02aa49459c9f16afd8b6d567a9" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;StateField&gt;NvfailedState&lt;/StateField&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.State.Nvfailed.Monitor</Id>
+        <DisplayName>Volume Nvfailed State Monitor</DisplayName>
+        <Description>Monitors volume state: NvfailedState.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume State: NvfailedState</AlertName>
+        <AlertDescription>Volume NV state is invalud for the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancecebfed61a3f640c99275278b05856e09" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;StateField&gt;Unrecoverable&lt;/StateField&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.State.Unrecoverable.Monitor</Id>
+        <DisplayName>Volume Unrecoverable State Monitor</DisplayName>
+        <Description>Monitors volume state: Unrecoverable.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume State: Unrecoverable</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is unrecoverable.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancef7c2d006e50b48f0bbe2ab6dd0f40af9" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;StateField&gt;Inconsistent&lt;/StateField&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.State.Inconsistent.Monitor</Id>
+        <DisplayName>Volume Inconsistent State Monitor</DisplayName>
+        <Description>Monitors volume state: Inconsistent.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume State: Inconsistent</AlertName>
+        <AlertDescription>Volume state is inconsistent  for the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instanceb1c60958a221434b90b920c3da6139b1" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;StateField&gt;Invalid&lt;/StateField&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.State.Invalid.Monitor</Id>
+        <DisplayName>Volume Invalid State Monitor</DisplayName>
+        <Description>Monitors volume state: Invalid.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume State: Invalid</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is invalid.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance0ba26936db6140f7ab3046e75002cf3a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Online.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.Online.Monitor</Id>
+        <DisplayName>Volume Online State Monitor</DisplayName>
+        <Description>Monitors volume online status.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Not Online</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is not online.
+
+The current state: $Data/Context/Property[@Name='State']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance9918addea1d54c0cad22792e8cd3992f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.PercentageSizeFree.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootVolumes&gt;true&lt;/ExcludeRootVolumes&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentFreeWarning&gt;10&lt;/PercentFreeWarning&gt;&lt;PercentFreeCritical&gt;5&lt;/PercentFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeUsage.AggregateMonitor</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.PercentUsed.Monitor</Id>
+        <DisplayName>Volume Usage Percent Monitor</DisplayName>
+        <Description>Alerts if free space in % is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Free Space % Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM is running low on free space (percent).
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+
+Impacted share details:
+  CIFS Server: $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/CIFSServer$
+There are $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareCount$ shares using this volume, all are impacted by the volume alert.
+Impacted Shares:
+$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareList$
+
+If there are multiple shares, some of them may be not displayed in this alert due to the length limit.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instanced44986e13c5b40538eef5d65585ebe58" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.Dynamic.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootVolumes&gt;true&lt;/ExcludeRootVolumes&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentVolumeFreeWarning&gt;4.9&lt;/PercentVolumeFreeWarning&gt;&lt;MByteVolumeFreeWarning&gt;50176&lt;/MByteVolumeFreeWarning&gt;&lt;PercentVolumeFreeCritical&gt;2.5&lt;/PercentVolumeFreeCritical&gt;&lt;MByteVolumeFreeCritical&gt;25088&lt;/MByteVolumeFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.FreeSpaceDynamic.Monitor</Id>
+        <DisplayName>Volume Free Space Smart Threshold Monitor</DisplayName>
+        <Description>Monitor volume usage with a smart choise between percent and absolute threshold. Aligned with LUN Volume Overprovisioning monitor. </Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Free Space Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is running low on free space.
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='Format_Free']$
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+
+Impacted share details:
+  CIFS Server: $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/CIFSServer$
+There are $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareCount$ shares using this volume, all are impacted by the volume alert.
+Impacted Shares:
+$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareList$
+
+If there are multiple shares, some of them may be not displayed in this alert due to the length limit.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance50a31699ca594677bae40cf686f8d060" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeMB.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;ExcludeRootVolumes&gt;true&lt;/ExcludeRootVolumes&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;FreeMBWarning&gt;4096&lt;/FreeMBWarning&gt;&lt;FreeMBCritical&gt;2048&lt;/FreeMBCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeUsage.AggregateMonitor</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Volume.MBUsed.Monitor</Id>
+        <DisplayName>Volume Usage MB Monitor</DisplayName>
+        <Description>Alerts if free space in MB is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Free Space MB Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is running low on free space (MB).
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='Format_Free']$
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$
+
+Impacted share details:
+  CIFS Server: $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/CIFSServer$
+There are $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareCount$ shares using this volume, all are impacted by the volume alert.
+Impacted Shares:
+$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/ShareList$
+
+If there are multiple shares, some of them may be not displayed in this alert due to the length limit.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

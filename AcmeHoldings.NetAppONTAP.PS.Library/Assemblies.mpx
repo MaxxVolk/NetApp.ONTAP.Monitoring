@@ -1,0 +1,9 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Resources>
+    <DeployableAssembly ID="AcmeHoldings.NetAppONTAP.PS.Library.OntapiPS.DeployableAssembly" 
+                        QualifiedName="OntapiPS, Version=4.4.0.0, Culture=neutral, PublicKeyToken=5d4427961a9a0646" 
+                        FileName="OntapiPS.dll" Accessibility="Public" HasNullStream="false">
+      <Dependency ID="ANSL!AcmeHoldings.NetAppONTAP.SDK.Library.log4net.DeployableAssembly" />
+    </DeployableAssembly>
+  </Resources>
+</ManagementPackFragment>

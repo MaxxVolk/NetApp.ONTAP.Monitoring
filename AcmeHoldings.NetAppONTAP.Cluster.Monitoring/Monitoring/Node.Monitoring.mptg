@@ -1,0 +1,50 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ClusterName&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class"]/Name$&lt;/ClusterName&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;WarningAtPercentUsage&gt;70&lt;/WarningAtPercentUsage&gt;&lt;CriticalAtPercentUsage&gt;85&lt;/CriticalAtPercentUsage&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Healthy</OperationalStateId>
+            <OperationalStateDisplayName>Healthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>Healthy</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Exhausting</OperationalStateId>
+            <OperationalStateDisplayName>Exhausting</OperationalStateDisplayName>
+            <MonitorTypeStateId>Exhausting</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Exhausted</OperationalStateId>
+            <OperationalStateDisplayName>Exhausted</OperationalStateDisplayName>
+            <MonitorTypeStateId>Exhausted</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>NodeStorePoolPerf.Monitor</Id>
+        <DisplayName>NFS4 Store Pool Resources Monitor</DisplayName>
+        <Description>Alerts when cluster node Store Pool resources are running low.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>NFS4 Store Pool Resource Usage High</AlertName>
+        <AlertDescription>Store Pool resources at the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class"]/Name$ node of the $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster are running low. The $Data/Context/Property[@Name='MaxingOutCounter']$ counter is maxing out at $Data/Context/Property[@Name='MaxUsage']$% of its maximum value.
+
+Other counter values are below:
+$Data/Context/Property[@Name='AllCounters']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

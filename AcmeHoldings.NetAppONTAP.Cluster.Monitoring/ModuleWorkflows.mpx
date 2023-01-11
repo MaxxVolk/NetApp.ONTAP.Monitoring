@@ -1,0 +1,330 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Discovery.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.ClusterAndNodeDiscovery</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Discovery.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="SerialNumber" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.SVMAndVolumeDiscovery</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+      
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Discovery.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="SerialNumber" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.AggregateDiscovery</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ObjectType" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Counter" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CollectionInterval" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.PerfCollectionProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.RWRatio.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ObjectType" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CollectionInterval" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.SyntheticPerfReadWriteRatioProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.Throughput.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ObjectType" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="VolumeSizeMB" type="xsd:double" />
+          <xsd:element minOccurs="1" name="CollectionInterval" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.SyntheticPerfThroughputProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+      
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.VolumeSpaceProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.LUNSize.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.LUNSpaceProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.AggrSpaceProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="VolumeSizeMB" type="xsd:double" />
+          <xsd:element minOccurs="1" name="CollectionInterval" type="xsd:int" />
+          <xsd:element minOccurs="1" name="IOPSperTBLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="RWRatioLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="ResponseTime_microsec" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <ModuleImplementation Isolation="Shared">
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.VolumeSLAProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.VolumeStateProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.State.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.LUNStateProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumPerfDataAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.PerformanceCollectorHealthProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumCacheAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.ObjectCacheHealthProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterName" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.StorePoolExhaustProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <ProbeActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Event.ProbeAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="0" name="FilterName" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ReadIntervalSeconds" type="xsd:int" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PS.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.PS.Modules.ClusterEventsProbeAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+
+      <WriteActionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.CacheRefresh.WriteAction" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters />
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.PerfCollectionWriteAction</Type>
+          </Managed>
+        </ModuleImplementation>
+        <InputType>System!System.BaseData</InputType>
+      </WriteActionModuleType>
+      
+    </ModuleTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

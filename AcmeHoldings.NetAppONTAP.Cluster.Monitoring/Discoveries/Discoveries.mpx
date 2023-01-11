@@ -1,0 +1,132 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Discovery.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_GetClusterAndNodes" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Discovery.ProbeAction">
+                <sourceId>$Config/sourceId$</sourceId>
+                <managedEntityId>$Config/managedEntityId$</managedEntityId>
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_GetClusterAndNodes">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Discovery.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="SerialNumber" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_GetSVMsAndVolumes" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Discovery.ProbeAction">
+                <sourceId>$Config/sourceId$</sourceId>
+                <managedEntityId>$Config/managedEntityId$</managedEntityId>
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <SerialNumber>$Config/SerialNumber$</SerialNumber>
+                <ClusterUuid>$Config/ClusterUuid$</ClusterUuid>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_GetSVMsAndVolumes">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Discovery.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="sourceId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="managedEntityId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="SerialNumber" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_Aggregate" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Discovery.ProbeAction">
+                <sourceId>$Config/sourceId$</sourceId>
+                <managedEntityId>$Config/managedEntityId$</managedEntityId>
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <SerialNumber>$Config/SerialNumber$</SerialNumber>
+                <ClusterUuid>$Config/ClusterUuid$</ClusterUuid>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_Aggregate">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+      
+    </ModuleTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

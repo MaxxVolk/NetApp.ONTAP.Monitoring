@@ -1,0 +1,86 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{45a1ab59-0b7b-41bd-87bc-644a56e89387}</ProjectGuid>
+    <RootNamespace>AcmeHoldings.NetAppONTAP.SDK.Library</RootNamespace>
+    <Name>AcmeHoldings.NetAppONTAP.SDK.Library</Name>
+    <ManagementPackName>AcmeHoldings.NetAppONTAP.SDK.Library</ManagementPackName>
+    <Version>1.0.0.0</Version>
+    <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
+    <MpFrameworkProfile>OM</MpFrameworkProfile>
+    <ProductVersion>1.1.0.0</ProductVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <GenerateSealed>false</GenerateSealed>
+    <Company>AcmeHoldings</Company>
+    <Copyright>Copyright (c) AcmeHoldings. All rights reserved.</Copyright>
+    <DelaySigning>false</DelaySigning>
+    <AssemblyOriginatorKeyFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DelaySigning>False</DelaySigning>
+    <Company>AcmeHoldings</Company>
+    <Copyright>Copyright (c) AcmeHoldings. NetApp ONTAP SDK Library (c) NetApp. All rights reserved.</Copyright>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>..\.key\AcmeHoldings.snk</AssemblyOriginatorKeyFile>
+    <GenerateSealed>True</GenerateSealed>
+  </PropertyGroup>
+  <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Library">
+      <Alias>SC</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.Windows.Library">
+      <Alias>Windows</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Health.Library">
+      <Alias>Health</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Library">
+      <Alias>System</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
+      <Alias>Visualization</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ManagementPack.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assemblies.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
+      <Name>log4net</Name>
+      <AssemblyName>log4net.dll</AssemblyName>
+      <HintPath>..\3rd Party Libraries\log4net.dll</HintPath>
+      <Private>True</Private>
+      <PackageToBundle>True</PackageToBundle>
+    </Reference>
+    <Reference Include="netapp-manage, Version=5.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <Name>netapp-manage</Name>
+      <AssemblyName>netapp-manage.dll</AssemblyName>
+      <HintPath>..\3rd Party Libraries\netapp-manage.dll</HintPath>
+      <Private>True</Private>
+      <PackageToBundle>True</PackageToBundle>
+    </Reference>
+    <Reference Include="ontap-9-12-1, Version=1.21.0.0, Culture=neutral, PublicKeyToken=null">
+      <Name>ontap-9-12-1</Name>
+      <AssemblyName>ontap-9-12-1.dll</AssemblyName>
+      <HintPath>..\3rd Party Libraries\ontap-9-12-1.dll</HintPath>
+      <Private>True</Private>
+      <PackageToBundle>True</PackageToBundle>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
+</Project>

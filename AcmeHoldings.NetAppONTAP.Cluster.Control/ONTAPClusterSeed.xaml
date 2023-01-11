@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="AcmeHoldings.NetAppONTAP.Cluster.Control.ONTAPClusterSeed"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AcmeHoldings.NetAppONTAP.Cluster.Control"
+             mc:Ignorable="d"
+             Background="White"
+             d:DesignHeight="500" Visibility="Visible" Width="697.004">
+  <Grid Visibility="Visible" HorizontalAlignment="Left" Width="687">
+    <TabControl x:Name="tcMain" Margin="10,10,0,0" VerticalAlignment="Top" Height="480" Visibility="Visible" HorizontalAlignment="Left" Width="667">
+      <TabItem Header="ONTAP Clusters" Visibility="Visible">
+        <Grid IsManipulationEnabled="True">
+          <DataGrid AutoGenerateColumns="False"
+                  x:Name="dgDeploymentSeeds" Margin="10,10,0,0" Height="432" VerticalAlignment="Top" ItemsSource="{Binding }" HorizontalAlignment="Left" Width="641">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Cluster Serial Number" Width="150" Binding="{Binding SerialNumber}" />
+              <DataGridTextColumn Header="Cluster FQDN" Width="180" Binding="{Binding ConnectionFQDN}" />
+              <DataGridComboBoxColumn x:Name="dgcbcManagingPool" Header="Managing Pool" Width="290" SelectedItemBinding="{Binding ManagingActionPoint}">
+                <DataGridComboBoxColumn.ElementStyle>
+                  <Style TargetType="ComboBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                  </Style>
+                </DataGridComboBoxColumn.ElementStyle>
+                <DataGridComboBoxColumn.EditingElementStyle>
+                  <Style TargetType="ComboBox">
+                  </Style>
+                </DataGridComboBoxColumn.EditingElementStyle>
+              </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+          </DataGrid>
+        </Grid>
+      </TabItem>
+      <TabItem Header="About">
+        <Grid>
+          <Label x:Name="lCopyright2" Content="(c) AcmeHoldings, 2017." Margin="10,10,10,217" />
+        </Grid>
+      </TabItem>
+    </TabControl>
+  </Grid>
+
+</UserControl>

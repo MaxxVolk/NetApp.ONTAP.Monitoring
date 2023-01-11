@@ -1,0 +1,156 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.DataSource -->
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterName" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_NodeStorePoolPerf" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.ProbeAction">
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <ClusterName>$Config/ClusterName$</ClusterName>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_NodeStorePoolPerf">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+                            
+    </ModuleTypes>
+    <MonitorTypes>
+
+      <!--  -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Healthy" NoDetection="false" />
+          <MonitorTypeState ID="Exhausting" NoDetection="false"/>
+          <MonitorTypeState ID="Exhausted" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ClusterName" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="WarningAtPercentUsage" type="xsd:double" />
+          <xsd:element minOccurs="1" name="CriticalAtPercentUsage" type="xsd:double" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="WarningAtPercentUsage" Selector="$Config/WarningAtPercentUsage$" ParameterType="double" />
+          <OverrideableParameter ID="CriticalAtPercentUsage" Selector="$Config/CriticalAtPercentUsage$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_NodeStorePoolPerf" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.NodeStorePoolPerf.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <ClusterName>$Config/ClusterName$</ClusterName>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ConditionDetection ID="CD_Healthy" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Double">Property[@Name='MaxUsage']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Less</Operator>
+                  <ValueExpression>
+                    <Value Type="Double">$Config/WarningAtPercentUsage$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Exhausting" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='MaxUsage']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/WarningAtPercentUsage$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='MaxUsage']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/CriticalAtPercentUsage$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Exhausted" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Double">Property[@Name='MaxUsage']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>GreaterEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="Double">$Config/CriticalAtPercentUsage$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="Healthy">
+              <Node ID="CD_Healthy">
+                <Node ID="DS_NodeStorePoolPerf" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Exhausting">
+              <Node ID="CD_Exhausting">
+                <Node ID="DS_NodeStorePoolPerf" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Exhausted">
+              <Node ID="CD_Exhausted">
+                <Node ID="DS_NodeStorePoolPerf" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      
+    </MonitorTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

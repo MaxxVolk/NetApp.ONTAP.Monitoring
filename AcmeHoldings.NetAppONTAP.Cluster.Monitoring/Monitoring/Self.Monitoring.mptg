@@ -1,0 +1,84 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance957022b1f1d3401988108c91ae461232" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;ConnectionFQDN&gt;$Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;MaximumPerfDataAge&gt;900&lt;/MaximumPerfDataAge&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>STALE</OperationalStateId>
+            <OperationalStateDisplayName>STALE</OperationalStateDisplayName>
+            <MonitorTypeStateId>STALE</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>FAILURE</OperationalStateId>
+            <OperationalStateDisplayName>FAILURE</OperationalStateDisplayName>
+            <MonitorTypeStateId>FAILURE</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>PerformanceCollectorHealth.Monitor</Id>
+        <DisplayName>Performance Collector Health Monitor</DisplayName>
+        <Description>Management Pack Self-Monitoring: ensures that Performance Collector internal component receives fresh data.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>PerformanceHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>MP Self Monitoring: Performance Collector Component Not Healthy</AlertName>
+        <AlertDescription>Internal Management Pack Performance Collector Component is not healthy. Review Operations Manager Event Log for events from Health Service and Acme Holdings ONTAP Clustered Monitoring sources.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance4d8c3e7b16084a1f82b64ed46ec7c6c5" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;ConnectionFQDN&gt;$Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;MaximumCacheAge&gt;900&lt;/MaximumCacheAge&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>STALE</OperationalStateId>
+            <OperationalStateDisplayName>STALE</OperationalStateDisplayName>
+            <MonitorTypeStateId>STALE</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>ObjectCacheHealth.Monitor</Id>
+        <DisplayName>Object State Cache Health Monitor</DisplayName>
+        <Description>Management Pack Self-Monitoring: ensures that Object State Cache internal component refreshed regulary.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>PerformanceHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>MP Self Monitoring: Object State Cache Component Not Healthy</AlertName>
+        <AlertDescription>Internal Management Pack Object State Cache Component is not healthy. Review Operations Manager Event Log for events from Health Service and Acme Holdings ONTAP Clustered Monitoring sources.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

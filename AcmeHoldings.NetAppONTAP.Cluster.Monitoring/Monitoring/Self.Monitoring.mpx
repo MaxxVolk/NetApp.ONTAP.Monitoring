@@ -1,0 +1,219 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumPerfDataAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="MaximumPerfDataAge" Selector="$Config/MaximumPerfDataAge$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/MaximumPerfDataAge$</IntervalSeconds>
+                <SyncTime />
+              </DataSource>
+              <ProbeAction ID="PA_PerformanceCollectorHealth" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.ProbeAction">
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <MaximumPerfDataAge>$Config/MaximumPerfDataAge$</MaximumPerfDataAge>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_PerformanceCollectorHealth">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumCacheAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="MaximumCacheAge" Selector="$Config/MaximumCacheAge$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/MaximumCacheAge$</IntervalSeconds>
+                <SyncTime />
+              </DataSource>
+              <ProbeAction ID="PA_ObjectCacheHealth" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.ProbeAction">
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <MaximumCacheAge>$Config/MaximumCacheAge$</MaximumCacheAge>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_ObjectCacheHealth">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false" />
+          <MonitorTypeState ID="STALE" NoDetection="false"/>
+          <MonitorTypeState ID="FAILURE" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumPerfDataAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="MaximumPerfDataAge" Selector="$Config/MaximumPerfDataAge$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_PerformanceCollectorHealth" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.PerformanceCollectorHealth.DataSource">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <MaximumPerfDataAge>$Config/MaximumPerfDataAge$</MaximumPerfDataAge>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='PerfCollectorState']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">UPTODATE</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_STALE" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='PerfCollectorState']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">STALE</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_FAILURE" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='PerfCollectorState']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">FAILURE</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_PerformanceCollectorHealth" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="STALE">
+              <Node ID="CD_STALE">
+                <Node ID="DS_PerformanceCollectorHealth" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="FAILURE">
+              <Node ID="CD_FAILURE">
+                <Node ID="DS_PerformanceCollectorHealth" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false" />
+          <MonitorTypeState ID="STALE" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="MaximumCacheAge" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="MaximumCacheAge" Selector="$Config/MaximumCacheAge$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ObjectCacheHealth" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ObjectCacheHealth.DataSource">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <MaximumCacheAge>$Config/MaximumCacheAge$</MaximumCacheAge>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='ObjectCacheState']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">UPTODATE</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_STALE" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='ObjectCacheState']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">STALE</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ObjectCacheHealth" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="STALE">
+              <Node ID="CD_STALE">
+                <Node ID="DS_ObjectCacheHealth" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

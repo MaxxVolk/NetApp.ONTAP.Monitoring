@@ -1,0 +1,456 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class" Base="System!System.LogicalEntity"
+                   Accessibility="Public" Hosted="false" Abstract="false" Singleton="false">
+          <Property ID="SerialNumber" Type="string" Key="true" CaseSensitive="false"/>
+          <Property ID="ConnectionFQDN" Type="string"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="ClusterUuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="SerialNumber" Type="string"/>
+          <Property ID="Contact" Type="string"/>
+          <Property ID="Location" Type="string"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="NodeUuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="IsNodeEligible" Type="bool" />
+          <Property ID="IsNodeEpsilon" Type="bool" />
+          <Property ID="FirmwareVersion" Type="string"/>
+          <Property ID="FirmwareInstallDate" Type="datetime"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="Uuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="AllowedProtocols" Type="string"/>
+          <Property ID="AntivirusOnAccessPolicy" Type="string"/>
+          <Property ID="CachingPolicy" Type="string"/>
+          <Property ID="Comment" Type="string"/>
+          <Property ID="DisallowedProtocols" Type="string"/>
+          <Property ID="Ipspace" Type="string"/>
+          <Property ID="IsConfigLockedForChanges" Type="string"/>
+          <Property ID="IsRepositoryVserver" Type="string"/>
+          <Property ID="LdapDomain" Type="string"/>
+          <Property ID="MaxVolumes" Type="string"/>
+          <Property ID="NisDomain" Type="string"/>
+          <Property ID="QosPolicyGroup" Type="string"/>
+          <Property ID="QuotaPolicy" Type="string"/>
+          <Property ID="RootVolume" Type="string"/>
+          <Property ID="RootVolumeAggregate" Type="string"/>
+          <Property ID="RootVolumeSecurityStyle" Type="string"/>
+          <Property ID="SnapshotPolicy" Type="string"/>
+          <Property ID="VserverSubtype" Type="string"/>
+          <Property ID="VserverType" Type="string"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="Uuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="InstanceUuid" Type="string"/>
+          <Property ID="Comment" Type="string"/>
+          <Property ID="ProvenanceUuid" Type="string"/>
+          <Property ID="SizeMB" Type="double"/>
+          <Property ID="SnapshotReserveSize" Type="double"/>
+          <Property ID="IsSisVolume" Type="bool"/>
+          <Property ID="IsNodeRoot" Type="bool"/>
+          <Property ID="IsVserverRoot" Type="bool"/>
+          <Property ID="IsAutosizeEnabled" Type="bool"/>
+          <Property ID="IsLUNVolume" Type="bool"/>
+          <Property ID="AutosizeMode" Type="string"/>
+          <Property ID="IsShared" Type="bool"/>
+          <Property ID="CIFSServer" Type="string"/>
+          <Property ID="ShareList" Type="string" MaxLength="2048"/>
+          <Property ID="ShareCount" Type="int"/>
+          <Property ID="IsDataProtectionMirror" Type="bool"/>
+          <Property ID="IsLoadSharingMirror" Type="bool"/>
+          <Property ID="IsMoveMirror" Type="bool"/>
+          <Property ID="IsReplicaVolume" Type="bool"/>
+          <Optimization ID="idxName">
+            <Property ID="Name"/>
+          </Optimization>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="ShareName" Type="string" Key="true"/>
+          <Property ID="Path" Type="string"/>
+          <Property ID="Comment" Type="string"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="CifsServer" Type="string" Key="true"/>
+          <Property ID="AuthStyle" Type="string"/>
+          <Property ID="Comment" Type="string"/>
+          <Property ID="Domain" Type="string"/>
+          <Property ID="DomainWorkgroup" Type="string"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" Base="System!System.LogicalHardware"
+                   Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="Uuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="SizeTotalGB" Type="double"/>
+          <Property ID="IsRoot" Type="bool"/>
+        </ClassType>
+
+        <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" Base="System!System.LogicalHardware"
+                     Accessibility="Public" Hosted="true" Abstract="false" Singleton="false">
+          <Property ID="Uuid" Type="string" Key="true" CaseSensitive="false" MaxLength="256"/>
+          <Property ID="Name" Type="string"/>
+          <Property ID="Path" Type="string"/>
+          <Property ID="SizeMB" Type="double"/>
+          <Property ID="MultiprotocolType" Type="string"/>
+          <Property ID="Alignment" Type="string"/>
+          <Property ID="Class" Type="string"/>
+        </ClassType>
+        
+      <ClassType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolumes.Group" Base="MSIL!Microsoft.SystemCenter.InstanceGroup" 
+                 Accessibility="Public" Singleton="true" />
+
+      </ClassTypes>
+      <RelationshipTypes>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed_Hosts_Cluster.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="Seed" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class" />
+          <Target ID="Cluster" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster_Host_ClusterNode.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="Cluster" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" />
+          <Target ID="ClusterNode" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster_Host_Aggregate.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="Cluster" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" />
+          <Target ID="Aggregate" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster_Host_SVM.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="Cluster" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" />
+          <Target ID="SVM" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM_Host_Volume.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="SVM" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" />
+          <Target ID="Volume" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume_Host_LUN.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="Volume" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" />
+          <Target ID="LUN" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"/>
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM_Host_CifsServer.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="SVM" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" />
+          <Target ID="CifsServer" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" />
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer_Host_CifsShare.Relationship"
+                          Base="System!System.Hosting" Accessibility="Internal">
+          <Source ID="CifsServer" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" />
+          <Target ID="CifsShare" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class"/>
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume_Contain_CifsShare.Relationship"
+                          Base="System!System.Containment" Accessibility="Internal">
+          <Source ID="Volume" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" />
+          <Target ID="CifsShare" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class"/>
+        </RelationshipType>
+
+        <RelationshipType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM_Referens_Aggregate.Relationship"
+                          Base="System!System.Reference" Accessibility="Internal">
+          <Source ID="SVM" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" />
+          <Target ID="Aggregate" Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" />
+        </RelationshipType>
+
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class">
+          <Name>ONTAP Cluster Appliance Seed (Acme Holdings)</Name>
+          <Description>Start class to register an appliance with SCOM.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class" SubElementID="SerialNumber">
+          <Name>Appliance Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class" SubElementID="ConnectionFQDN">
+          <Name>Appliance FQDN or IP</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class">
+          <Name>ONTAP Clustered Appliance (Acme Holdings)</Name>
+          <Description>The top level clustered appliance class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" SubElementID="ClusterUuid">
+          <Name>Cluster UUID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" SubElementID="Contact">
+          <Name>Contact</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" SubElementID="Location">
+          <Name>Location</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class">
+          <Name>ONTAP Cluster Node (Acme Holdings)</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="FirmwareInstallDate">
+          <Name>Firmware Install Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="FirmwareVersion">
+          <Name>Firmware Version</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="IsNodeEligible">
+          <Name>Is Node Eligible</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="IsNodeEpsilon">
+          <Name>Is Node Epsilon</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.ClusterNode.Class" SubElementID="NodeUuid">
+          <Name>Node Uuid</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class">
+          <Name>ONTAP Storage Virtual Machine (Acme Holdings)</Name>
+          <Description>Storage Virtual Machine located on a clustered appliance.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="AllowedProtocols">
+          <Name>Enabled Protocols</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="AntivirusOnAccessPolicy">
+          <Name>Antivirus OnAccess Policy</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="CachingPolicy">
+          <Name>Caching Policy</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="Comment">
+          <Name>Comment</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="DisallowedProtocols">
+          <Name>Disabled Protocols</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="IsConfigLockedForChanges">
+          <Name>Is Configuration Locked For Changes</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="Ipspace">
+          <Name>IP Space</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="IsRepositoryVserver">
+          <Name>Is Repository Vserver</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="LdapDomain">
+          <Name>LdapDomain</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="MaxVolumes">
+          <Name>MaxVolumes</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="NisDomain">
+          <Name>NIS Domain</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="QosPolicyGroup">
+          <Name>QoS Policy Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="QuotaPolicy">
+          <Name>QuotaPolicy</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="RootVolume">
+          <Name>Root Volume</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="RootVolumeAggregate">
+          <Name>Root Volume Aggregate</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="RootVolumeSecurityStyle">
+          <Name>Root Volume Security Style</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="SnapshotPolicy">
+          <Name>Snapshot Policy</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="Uuid">
+          <Name>SVM Uuid</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="VserverSubtype">
+          <Name>SVM Sub-Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class" SubElementID="VserverType">
+          <Name>SVM Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class">
+          <Name>ONTAP SVM Volume (Acme Holdings)</Name>
+          <Description>Volume clustered appliance volume hosted on an SVM.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="Comment">
+          <Name>Comment</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="InstanceUuid">
+          <Name>Instance Uuid</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="ProvenanceUuid">
+          <Name>Provenance Uuid</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="Uuid">
+          <Name>Volume Uuid</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="SizeMB">
+          <Name>Size, MB</Name>
+          <Description>Filesystem size (in Mbytes) of the volume. This is the total usable size of the volume, not including WAFL reserve.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="SnapshotReserveSize">
+          <Name>Snapshot Reserve, MB</Name>
+          <Description>The size (in Mbytes) in the volume that has been set aside as reserve for snapshot usage.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsSisVolume">
+          <Name>SIS Volume</Name>
+          <Description>If true, it means that the volume contains shared (deduplication, file clones) or compressed data. If SIS is disabled, this field is false.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsNodeRoot">
+          <Name>Node Root</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsLUNVolume">
+          <Name>LUN Volume</Name>
+          <Description>If true, then the volume has at least one LUN file hosted.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsVserverRoot">
+          <Name>SVM Root</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="AutosizeMode">
+          <Name>Auto-size Mode</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsAutosizeEnabled">
+          <Name>Auto-size Enabled</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsShared">
+          <Name>Shared</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="CIFSServer">
+          <Name>CIFS Server</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="ShareList">
+          <Name>List Of Shares</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="ShareCount">
+          <Name>Number Of Shares</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsDataProtectionMirror">
+          <Name>Data Protection Mirror</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsLoadSharingMirror">
+          <Name>Load Sharing Mirror</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsMoveMirror">
+          <Name>Move Mirror</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class" SubElementID="IsReplicaVolume">
+          <Name>Replica Volume</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class">
+          <Name>ONTAP Network Server (Acme Holdings)</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" SubElementID="AuthStyle">
+          <Name>Authentication Method</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" SubElementID="CifsServer">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" SubElementID="Comment">
+          <Name>Comment</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" SubElementID="Domain">
+          <Name>Domain Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsServer.Class" SubElementID="DomainWorkgroup">
+          <Name>Workgroup Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class">
+          <Name>ONTAP Network Share (Acme Holdings)</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class" SubElementID="Comment">
+          <Name>Comment</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class" SubElementID="Path">
+          <Name>Path</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.CifsShare.Class" SubElementID="ShareName">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class">
+          <Name>ONTAP Aggregate (Acme Holdings)</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" SubElementID="IsRoot">
+          <Name>Is Root</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" SubElementID="SizeTotalGB">
+          <Name>Total Size, GB</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class" SubElementID="Uuid">
+          <Name>UUID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class">
+          <Name>ONTAP LUN (Acme Holdings)</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="Alignment">
+          <Name>Alignment</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="Class">
+          <Name>Class</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="MultiprotocolType">
+          <Name>Multiprotocol Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="Name">
+          <Name>Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="Path">
+          <Name>Path</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="SizeMB">
+          <Name>Size, MB</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class" SubElementID="Uuid">
+          <Name>UUID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolumes.Group">
+          <Name>NetApp ONTAP Volumes with LUNs</Name>
+          <Description>Contain all volumes, which have one or more LUN files hosted.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

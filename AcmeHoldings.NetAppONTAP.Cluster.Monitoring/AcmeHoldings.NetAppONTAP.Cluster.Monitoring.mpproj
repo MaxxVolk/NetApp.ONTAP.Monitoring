@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{dd80c752-af1e-4834-a22e-a0bcf150ad3a}</ProjectGuid>
+    <RootNamespace>AcmeHoldings.NetAppONTAP.Cluster.Monitoring</RootNamespace>
+    <Name>AcmeHoldings.NetAppONTAP.Cluster.Monitoring</Name>
+    <ManagementPackName>AcmeHoldings.NetAppONTAP.Cluster.Monitoring</ManagementPackName>
+    <Version>1.0.0.0</Version>
+    <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
+    <MpFrameworkProfile>OM</MpFrameworkProfile>
+    <ProductVersion>1.1.0.0</ProductVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <GenerateSealed>True</GenerateSealed>
+    <Company>AcmeHoldings</Company>
+    <Copyright>Copyright (c) AcmeHoldings. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DelaySigning>False</DelaySigning>
+    <Company>AcmeHoldings</Company>
+    <Copyright>Copyright (c) Acme Holdings. All rights reserved.</Copyright>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>..\.key\AcmeHoldings.snk</AssemblyOriginatorKeyFile>
+    <GenerateSealed>True</GenerateSealed>
+  </PropertyGroup>
+  <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.DataWarehouse.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012R2\Microsoft.SystemCenter.DataWarehouse.Library.mp</HintPath>
+      <Alias>MSDL</Alias>
+      <MinVersion>7.1.10226.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.InstanceGroup.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012R2\Microsoft.SystemCenter.InstanceGroup.Library.mp</HintPath>
+      <Alias>MSIL</Alias>
+      <MinVersion>7.5.8501.0</MinVersion>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Library">
+      <Alias>SC</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.Windows.Library">
+      <Alias>Windows</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Health.Library">
+      <Alias>Health</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Library">
+      <Alias>System</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
+      <Alias>Visualization</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Performance.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012R2\System.Performance.Library.mp</HintPath>
+      <Alias>Perf</Alias>
+      <MinVersion>7.0.8433.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AcmeHoldings.NetAppONTAP.Cluster.Control\AcmeHoldings.NetAppONTAP.Cluster.Control.csproj">
+      <Name>AcmeHoldings.NetAppONTAP.Cluster.Control</Name>
+      <Project>{23c88b82-68ed-411b-8b07-eb7e69f8f833}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AcmeHoldings.NetAppONTAP.Cluster.Modules\AcmeHoldings.NetAppONTAP.Cluster.Modules.csproj">
+      <Name>AcmeHoldings.NetAppONTAP.Cluster.Modules</Name>
+      <Project>{fbe2cd04-cc95-46ae-a2e3-c81fc200d801}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AcmeHoldings.NetAppONTAP.Cluster.PS.Modules\AcmeHoldings.NetAppONTAP.Cluster.PS.Modules.csproj">
+      <Name>AcmeHoldings.NetAppONTAP.Cluster.PS.Modules</Name>
+      <Project>{5aab0d36-49a9-4c8f-a124-f078527e5643}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AcmeHoldings.NetAppONTAP.PS.Library\AcmeHoldings.NetAppONTAP.PS.Library.mpproj">
+      <Name>AcmeHoldings.NetAppONTAP.PS.Library</Name>
+      <Project>{bbd40347-e9db-4476-a110-d094c030e706}</Project>
+      <Private>True</Private>
+      <Alias>ANPL</Alias>
+    </ProjectReference>
+    <ProjectReference Include="..\AcmeHoldings.NetAppONTAP.SDK.Library\AcmeHoldings.NetAppONTAP.SDK.Library.mpproj">
+      <Name>AcmeHoldings.NetAppONTAP.SDK.Library</Name>
+      <Project>{45a1ab59-0b7b-41bd-87bc-644a56e89387}</Project>
+      <Private>True</Private>
+      <Alias>ANSL</Alias>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assemblies.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Discoveries\Discoveries.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Discoveries\DiscoveryTemplates.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Discoveries\DiscoveryTemplates.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementPack.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModuleWorkflows.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Aggregate.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\Aggregate.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Aggregate.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Cluster.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\Cluster.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Cluster.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\LUN.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\LUN.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\LUN.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Node.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\Node.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Node.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Overrides.Default.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Self.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\Self.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Self.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Volume.Monitoring.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitoring\Volume.Monitoring.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Volume.Monitoring.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Performance\CollectionRules.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Performance\CollectionRules.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Performance\Performance.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\View.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Presentation\View.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Special.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIComponents.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Discoveries\DiscoveryTemplates.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\Aggregate.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\Cluster.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\LUN.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\Node.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\Self.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitoring\Volume.Monitoring.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Performance\CollectionRules.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Presentation\View.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Discoveries" />
+    <Folder Include="Monitoring" />
+    <Folder Include="Performance" />
+    <Folder Include="Presentation" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
+</Project>

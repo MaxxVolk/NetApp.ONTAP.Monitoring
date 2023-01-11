@@ -1,0 +1,1445 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.DataSource -->
+      <DataSourceModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.DataSource" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PA_VolumeState" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.ProbeAction">
+                <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+                <Uuid>$Config/Uuid$</Uuid>
+                <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+                <username>$Config/username$</username>
+                <password>$Config/password$</password>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA_VolumeState">
+                <Node ID="DS_Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      
+    </ModuleTypes>
+    <MonitorTypes>
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false" />
+          <MonitorTypeState ID="ERROR" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="StateField" type="xsd:string" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_VolumeState" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_VolumeState" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_Passthrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Boolean">Property[@Name='$Config/StateField$']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="Boolean">false</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_ERROR" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Boolean">Property[@Name='$Config/StateField$']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="Boolean">true</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_VolumeState" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ERROR">
+              <Node ID="CD_ERROR">
+                <Node ID="DS_VolumeState" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_VolumeState">
+                  <Node ID="PA_Passthrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="ERROR">
+              <Node ID="CD_ERROR">
+                <Node ID="PA_VolumeState">
+                  <Node ID="PA_Passthrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Online.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Online.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false" />
+          <MonitorTypeState ID="ERROR" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_VolumeState" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_VolumeState" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.State.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_Passthrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">online</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_ERROR" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>NotEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="String">online</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_VolumeState" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ERROR">
+              <Node ID="CD_ERROR">
+                <Node ID="DS_VolumeState" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_VolumeState">
+                  <Node ID="PA_Passthrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="ERROR">
+              <Node ID="CD_ERROR">
+                <Node ID="PA_VolumeState">
+                  <Node ID="PA_Passthrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.PercentageSizeFree.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.PercentageSizeFree.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Warning" NoDetection="false"/>
+          <MonitorTypeState ID="Critical" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ExcludeRootVolumes" type="xsd:boolean" />
+          <!--<xsd:element minOccurs="1" name="ExcludeMirrorVolumes" type="xsd:boolean" />-->
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="PercentFreeWarning" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="PercentFreeCritical" type="xsd:integer" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+          <OverrideableParameter ID="ExcludeRootVolumes" Selector="$Config/ExcludeRootVolumes$" ParameterType="bool" />
+          <OverrideableParameter ID="PercentFreeWarning" Selector="$Config/PercentFreeWarning$" ParameterType="int" />
+          <OverrideableParameter ID="PercentFreeCritical" Selector="$Config/PercentFreeCritical$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ReadSample" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_OnDemand" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_PassThrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='PerfValue_PercentageSizeFree']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/PercentFreeWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <And>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </And>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Warning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='PerfValue_PercentageSizeFree']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>LessEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/PercentFreeWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='PerfValue_PercentageSizeFree']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/PercentFreeCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <Or>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </Or>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Critical" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='PerfValue_PercentageSizeFree']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>LessEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/PercentFreeCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <Or>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </Or>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeMB.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeMB.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Warning" NoDetection="false"/>
+          <MonitorTypeState ID="Critical" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ExcludeRootVolumes" type="xsd:boolean" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="FreeMBWarning" type="xsd:double" />
+          <xsd:element minOccurs="1" name="FreeMBCritical" type="xsd:double" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+          <OverrideableParameter ID="ExcludeRootVolumes" Selector="$Config/ExcludeRootVolumes$" ParameterType="bool" />
+          <OverrideableParameter ID="FreeMBWarning" Selector="$Config/FreeMBWarning$" ParameterType="double" />
+          <OverrideableParameter ID="FreeMBCritical" Selector="$Config/FreeMBCritical$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ReadSample" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_OnDemand" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_PassThrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <And>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </And>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Warning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>LessEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <Or>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </Or>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Critical" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>LessEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <Or>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </Or>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeSpaceCriticalLow.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.FreeSpaceCriticalLow.UnitMonitor" 
+                       Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Critical" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ExcludeRootVolumes" type="xsd:boolean" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="FreeMBCritical" type="xsd:double" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+          <OverrideableParameter ID="ExcludeRootVolumes" Selector="$Config/ExcludeRootVolumes$" ParameterType="bool" />
+          <OverrideableParameter ID="FreeMBCritical" Selector="$Config/FreeMBCritical$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ReadSample" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_OnDemand" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_PassThrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <And>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">true</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </And>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Critical" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_FreeMB']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>LessEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/FreeMBCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <Or>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                      <Expression>
+                        <SimpleExpression>
+                          <ValueExpression>
+                            <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                          </ValueExpression>
+                          <Operator>Equal</Operator>
+                          <ValueExpression>
+                            <Value Type="Boolean">false</Value>
+                          </ValueExpression>
+                        </SimpleExpression>
+                      </Expression>
+                    </Or>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Breached" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="VolumeSizeMB" type="xsd:double" />
+          <xsd:element minOccurs="1" name="IOPSperTBLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="RWRatioLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="ResponseTime_microsec" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="IOPSperTBLimit" Selector="$Config/IOPSperTBLimit$" ParameterType="int" />
+          <OverrideableParameter ID="RWRatioLimit" Selector="$Config/RWRatioLimit$" ParameterType="int" />
+          <OverrideableParameter ID="ResponseTime_microsec" Selector="$Config/ResponseTime_microsec$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+            </DataSource>
+            <ProbeAction ID="PA_CalculateSLA" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <InstanceUuid>$Config/InstanceUuid$</InstanceUuid>
+              <VolumeSizeMB>$Config/VolumeSizeMB$</VolumeSizeMB>
+              <CollectionInterval>$Config/IntervalSeconds$</CollectionInterval>
+              <IOPSperTBLimit>$Config/IOPSperTBLimit$</IOPSperTBLimit>
+              <RWRatioLimit>$Config/RWRatioLimit$</RWRatioLimit>
+              <ResponseTime_microsec>$Config/ResponseTime_microsec$</ResponseTime_microsec>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">OK</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">NODATA</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">STRESSED</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Breached" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">BREACHED</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_CalculateSLA">
+                  <Node ID="DS_Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Breached">
+              <Node ID="CD_Breached">
+                <Node ID="PA_CalculateSLA">
+                  <Node ID="DS_Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Stressed.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Stressed.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Stressed" NoDetection="false"/>
+          <MonitorTypeState ID="Breached" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="InstanceUuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="VolumeSizeMB" type="xsd:double" />
+          <xsd:element minOccurs="1" name="IOPSperTBLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="RWRatioLimit" type="xsd:int" />
+          <xsd:element minOccurs="1" name="ResponseTime_microsec" type="xsd:int" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="IOPSperTBLimit" Selector="$Config/IOPSperTBLimit$" ParameterType="int" />
+          <OverrideableParameter ID="RWRatioLimit" Selector="$Config/RWRatioLimit$" ParameterType="int" />
+          <OverrideableParameter ID="ResponseTime_microsec" Selector="$Config/ResponseTime_microsec$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_Scheduler" TypeID="System!System.SimpleScheduler">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+            </DataSource>
+            <ProbeAction ID="PA_CalculateSLA" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.SLA.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <InstanceUuid>$Config/InstanceUuid$</InstanceUuid>
+              <VolumeSizeMB>$Config/VolumeSizeMB$</VolumeSizeMB>
+              <CollectionInterval>$Config/IntervalSeconds$</CollectionInterval>
+              <IOPSperTBLimit>$Config/IOPSperTBLimit$</IOPSperTBLimit>
+              <RWRatioLimit>$Config/RWRatioLimit$</RWRatioLimit>
+              <ResponseTime_microsec>$Config/ResponseTime_microsec$</ResponseTime_microsec>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">OK</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">NODATA</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Stressed" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">STRESSED</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Breached" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Status']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">BREACHED</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_CalculateSLA">
+                  <Node ID="DS_Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Stressed">
+              <Node ID="CD_Stressed">
+                <Node ID="PA_CalculateSLA">
+                  <Node ID="DS_Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Breached">
+              <Node ID="CD_Breached">
+                <Node ID="PA_CalculateSLA">
+                  <Node ID="DS_Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.AutoGrowLimit.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.AutoGrowLimit.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Warning" NoDetection="false"/>
+          <MonitorTypeState ID="Critical" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="PercentGrownWarning" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="PercentGrownCritical" type="xsd:integer" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+          <OverrideableParameter ID="PercentGrownWarning" Selector="$Config/PercentGrownWarning$" ParameterType="int" />
+          <OverrideableParameter ID="PercentGrownCritical" Selector="$Config/PercentGrownCritical$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ReadSample" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_OnDemand" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_PassThrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_MaxSizeReachedPercent']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PercentGrownWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Boolean">Property[@Name='IsAutosizeEnabled']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Boolean">false</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Warning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_MaxSizeReachedPercent']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PercentGrownWarning$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_MaxSizeReachedPercent']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PercentGrownCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Boolean">Property[@Name='IsAutosizeEnabled']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Boolean">true</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Critical" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">Property[@Name='PerfValue_MaxSizeReachedPercent']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PercentGrownCritical$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Boolean">Property[@Name='IsAutosizeEnabled']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Boolean">true</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_Warning">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_Critical">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      
+      <!-- AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.Dynamic.UnitMonitor -->
+      <UnitMonitorType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.Dynamic.UnitMonitor" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" NoDetection="false"/>
+          <MonitorTypeState ID="Warning" NoDetection="false"/>
+          <MonitorTypeState ID="Critical" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ConnectionFQDN" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Uuid" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ExcludeRootVolumes" type="xsd:boolean" />
+          <xsd:element minOccurs="1" name="CacheTimeout" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="username" type="xsd:string" />
+          <xsd:element minOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="1" name="PercentVolumeFreeWarning" type="xsd:double" />
+          <xsd:element minOccurs="1" name="MByteVolumeFreeWarning" type="xsd:double" />
+          <xsd:element minOccurs="1" name="PercentVolumeFreeCritical" type="xsd:double" />
+          <xsd:element minOccurs="1" name="MByteVolumeFreeCritical" type="xsd:double" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="CacheTimeout" Selector="$Config/CacheTimeout$" ParameterType="int" />
+          <OverrideableParameter ID="ExcludeRootVolumes" Selector="$Config/ExcludeRootVolumes$" ParameterType="bool" />
+          <OverrideableParameter ID="PercentVolumeFreeWarning" Selector="$Config/PercentVolumeFreeWarning$" ParameterType="double" />
+          <OverrideableParameter ID="MByteVolumeFreeWarning" Selector="$Config/MByteVolumeFreeWarning$" ParameterType="double" />
+          <OverrideableParameter ID="PercentVolumeFreeCritical" Selector="$Config/PercentVolumeFreeCritical$" ParameterType="double" />
+          <OverrideableParameter ID="MByteVolumeFreeCritical" Selector="$Config/MByteVolumeFreeCritical$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS_ReadSample" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.VolumeSize.DataSource">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </DataSource>
+            <ProbeAction ID="PA_OnDemand" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.ProbeAction">
+              <ConnectionFQDN>$Config/ConnectionFQDN$</ConnectionFQDN>
+              <Uuid>$Config/Uuid$</Uuid>
+              <CacheTimeout>$Config/CacheTimeout$</CacheTimeout>
+              <username>$Config/username$</username>
+              <password>$Config/password$</password>
+            </ProbeAction>
+            <ProbeAction ID="PA_PassThrough" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CD_OK" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.StorageDynamicThreshold">
+              <TotalSizePropertyPath>Property[@Name='PerfValue_SizeMB']</TotalSizePropertyPath>
+              <FreeSpacePropertyPath>Property[@Name='PerfValue_FreeMB']</FreeSpacePropertyPath>
+              <!-- Megabyte -->
+              <ByteMultiplicator>1048576</ByteMultiplicator>
+              <BottomPercentThreshold>$Config/PercentVolumeFreeWarning$</BottomPercentThreshold>
+              <BottomAbsoluteThreshold>$Config/MByteVolumeFreeWarning$</BottomAbsoluteThreshold>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Warning" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.StorageDynamicThreshold">
+              <TotalSizePropertyPath>Property[@Name='PerfValue_SizeMB']</TotalSizePropertyPath>
+              <FreeSpacePropertyPath>Property[@Name='PerfValue_FreeMB']</FreeSpacePropertyPath>
+              <!-- Megabyte -->
+              <ByteMultiplicator>1048576</ByteMultiplicator>
+              <BottomPercentThreshold>$Config/PercentVolumeFreeCritical$</BottomPercentThreshold>
+              <BottomAbsoluteThreshold>$Config/MByteVolumeFreeCritical$</BottomAbsoluteThreshold>
+              <TopPercentThreshold>$Config/PercentVolumeFreeWarning$</TopPercentThreshold>
+              <TopAbsoluteThreshold>$Config/MByteVolumeFreeWarning$</TopAbsoluteThreshold>
+            </ConditionDetection>
+            <ConditionDetection ID="CD_Critical" TypeID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.StorageDynamicThreshold">
+              <TotalSizePropertyPath>Property[@Name='PerfValue_SizeMB']</TotalSizePropertyPath>
+              <FreeSpacePropertyPath>Property[@Name='PerfValue_FreeMB']</FreeSpacePropertyPath>
+              <!-- Megabyte -->
+              <ByteMultiplicator>1048576</ByteMultiplicator>
+              <TopPercentThreshold>$Config/PercentVolumeFreeCritical$</TopPercentThreshold>
+              <TopAbsoluteThreshold>$Config/MByteVolumeFreeCritical$</TopAbsoluteThreshold>
+            </ConditionDetection>
+            <!-- Stops packets if volume is root (IsAnyRoot == true) and ExcludeRootVolumes is true, -->
+            <!-- otherwise, if ExcludeRootVolumes is false, let packets through regardless of IsAnyRoot value -->
+            <ConditionDetection ID="CD_ExcludeRoot" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Boolean">Property[@Name='IsAnyRoot']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Boolean">false</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <Value Type="Boolean">$Config/ExcludeRootVolumes$</Value>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Boolean">false</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="DS_ReadSample" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_ExcludeRoot">
+                <Node ID="CD_Warning">
+                  <Node ID="DS_ReadSample" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_ExcludeRoot">
+                <Node ID="CD_Critical">
+                  <Node ID="DS_ReadSample" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+              <Node ID="CD_OK">
+                <Node ID="PA_OnDemand">
+                  <Node ID="PA_PassThrough" />
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Warning">
+              <Node ID="CD_ExcludeRoot">
+                <Node ID="CD_Warning">
+                  <Node ID="PA_OnDemand">
+                    <Node ID="PA_PassThrough" />
+                  </Node>
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Critical">
+              <Node ID="CD_ExcludeRoot">
+                <Node ID="CD_Critical">
+                  <Node ID="PA_OnDemand">
+                    <Node ID="PA_PassThrough" />
+                  </Node>
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

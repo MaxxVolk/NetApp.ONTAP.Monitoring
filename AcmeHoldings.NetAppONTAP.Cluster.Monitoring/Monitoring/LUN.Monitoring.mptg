@@ -1,0 +1,236 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNSize.FreeMB.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;FreeMBWarning&gt;5012&lt;/FreeMBWarning&gt;&lt;FreeMBCritical&gt;2048&lt;/FreeMBCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>LUNSize.FreeMB.Monitor</Id>
+        <DisplayName>LUN Usage MB Monitor</DisplayName>
+        <Description>Alerts if free space in MB is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>LUN Free Space MB Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Name$ LUN hosted on the $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is running low on free space (MB).
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='PerfValue_FreeMB']$MBytes
+
+LUN details:
+  Total size, GB: $Data/Context/Property[@Name='Format_Size']$
+  Free space, %: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$
+  Free space, GB: $Data/Context/Property[@Name='Format_Free']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instanced1ec3a058bab43c2a2ed253ab347ed1a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNSize.PercentageSizeFree.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentFreeWarning&gt;10&lt;/PercentFreeWarning&gt;&lt;PercentFreeCritical&gt;5&lt;/PercentFreeCritical&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Warning</OperationalStateId>
+            <OperationalStateDisplayName>Warning</OperationalStateDisplayName>
+            <MonitorTypeStateId>Warning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Critical</OperationalStateId>
+            <OperationalStateDisplayName>Critical</OperationalStateDisplayName>
+            <MonitorTypeStateId>Critical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>LUNSize.PercentageSizeFree.Monitor</Id>
+        <DisplayName>LUN Usage Percent Monitor</DisplayName>
+        <Description>Alerts if free space in percent is below the threshold.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>LUN Free Space % Low</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Name$ LUN hosted on the $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is running low on free space (percent).
+
+Amount of free space left at the time when alert was triggered: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+
+LUN details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance27fc698b58fc45f9bd55dced89a1ca07" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Online.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Online</OperationalStateId>
+            <OperationalStateDisplayName>Online</OperationalStateDisplayName>
+            <MonitorTypeStateId>Online</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Offline</OperationalStateId>
+            <OperationalStateDisplayName>Offline</OperationalStateDisplayName>
+            <MonitorTypeStateId>Offline</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>LUN.Online.Monitor</Id>
+        <DisplayName>LUN Online Status Monitor</DisplayName>
+        <Description>Alerts when LUN is not online.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>StateCollection</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>LUN Not Online</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Name$ LUN hosted on the $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ is not online.
+
+The current state: $Data/Context/Property[@Name='State']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance62566ec519e241228320fe9b6210af82" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Overused.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>UsageWithinSize</OperationalStateId>
+            <OperationalStateDisplayName>UsageWithinSize</OperationalStateDisplayName>
+            <MonitorTypeStateId>UsageWithinSize</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>UsageOverSize</OperationalStateId>
+            <OperationalStateDisplayName>UsageOverSize</OperationalStateDisplayName>
+            <MonitorTypeStateId>UsageOverSize</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>LUN.Overused.Monitor</Id>
+        <DisplayName>LUN Overused Monitor</DisplayName>
+        <Description>Alerts when LUN usage is bigger than its size.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>LUN Usage Exciding Size</AlertName>
+        <AlertDescription>The $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUN.Class"]/Name$ LUN hosted on the $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$ usage is bigger than its size.
+
+LUN details (some numbers should be negative):
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%
+  Free space: $Data/Context/Property[@Name='Format_Free']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance2e634f0064034e7aa19d47307f229302" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolume.Overprovisioned2.UnitMonitor</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;&lt;PercentVolumeFreeWarning&gt;5&lt;/PercentVolumeFreeWarning&gt;&lt;MByteVolumeFreeWarning&gt;51200&lt;/MByteVolumeFreeWarning&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>FitVolume</OperationalStateId>
+            <OperationalStateDisplayName>FitVolume</OperationalStateDisplayName>
+            <MonitorTypeStateId>FitVolume</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>AlmostFillVolume</OperationalStateId>
+            <OperationalStateDisplayName>AlmostFillVolume</OperationalStateDisplayName>
+            <MonitorTypeStateId>AlmostFillVolume</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>OverfillVolume</OperationalStateId>
+            <OperationalStateDisplayName>OverfillVolume</OperationalStateDisplayName>
+            <MonitorTypeStateId>OverfillVolume</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.ConfigurationState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>LUN.Volume.Overprovisioned2.Monitor</Id>
+        <DisplayName>LUN Volume Overprovisioning Monitor</DisplayName>
+        <Description>Potential LUN size summ is bigger than the volume size.</Description>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>High</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Volume Overprovisioned with LUNs</AlertName>
+        <AlertDescription>Total LUN size provisioned at this volume is near (warning) or exceeding (critical) the volume size for the $Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Name$ volume hosted on $Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.SVM.Class"]/Name$ storage VM in the $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Name$ cluster located at $Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class"]/Location$.
+
+LUN details: 
+Total size: $Data/Context/Property[@Name='PerfValue_TotalLUNSizeMB']$ MB
+Percent to volume: $Data/Context/Property[@Name='PerfValue_TotalLUNSizePercent']$%
+
+Volume details:
+  Total size: $Data/Context/Property[@Name='Format_Size']$
+  Free space: $Data/Context/Property[@Name='PerfValue_PercentageSizeFree']$%</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

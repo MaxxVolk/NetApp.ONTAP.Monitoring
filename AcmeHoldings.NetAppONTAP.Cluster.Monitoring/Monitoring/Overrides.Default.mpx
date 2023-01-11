@@ -1,0 +1,27 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Overrides>
+      <!-- For volumes, which host LUNs: -->
+      <!-- 1. Disable independant percent and MB usage monitors. -->
+      <!-- 2. Enable smart threshold monitor, wich has default thresholds adjusted to LUN Overprocisioning monitor. -->
+      <MonitorPropertyOverride ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.FreeSpaceDynamic.Monitor.EnableForLUNVolume"
+                               Context="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolumes.Group"
+                               Monitor="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.FreeSpaceDynamic.Monitor"
+                               Property="Enabled" Enforced="false">
+        <Value>true</Value>
+      </MonitorPropertyOverride>
+      <MonitorPropertyOverride ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.MBUsed.Monitor.DisableForLUNVolumes"
+                               Context="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolumes.Group"
+                               Monitor="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.MBUsed.Monitor"
+                               Property="Enabled" Enforced="false">
+        <Value>false</Value>
+      </MonitorPropertyOverride>
+      <MonitorPropertyOverride ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.PercentUsed.Monitor.DisableForLUNVolumes"
+                               Context="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.LUNVolumes.Group"
+                               Monitor="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.PercentUsed.Monitor"
+                               Property="Enabled" Enforced="false">
+        <Value>false</Value>
+      </MonitorPropertyOverride>
+    </Overrides>
+  </Monitoring>
+</ManagementPackFragment>

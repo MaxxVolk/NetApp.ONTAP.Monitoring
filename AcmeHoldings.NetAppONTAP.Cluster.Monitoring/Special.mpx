@@ -1,0 +1,30 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <ConditionDetectionModuleType ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.StorageDynamicThreshold" Accessibility="Public"
+                                    Stateful="false">
+        <Configuration>
+          <xsd:element minOccurs="1" name="TotalSizePropertyPath" type="xsd:string" />
+          <xsd:element minOccurs="0" name="FreeSpacePropertyPath" type="xsd:string" />
+          <xsd:element minOccurs="0" name="UsedSpacePropertyPath" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ByteMultiplicator" type="xsd:double" />
+          <xsd:element minOccurs="0" name="BottomPercentThreshold" type="xsd:double" />
+          <xsd:element minOccurs="0" name="BottomAbsoluteThreshold" type="xsd:double" />
+          <xsd:element minOccurs="0" name="TopPercentThreshold" type="xsd:double" />
+          <xsd:element minOccurs="0" name="TopAbsoluteThreshold" type="xsd:double" />
+        </Configuration>
+        <OverrideableParameters/>
+        <ModuleImplementation>
+          <Managed>
+            <Assembly>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Modules.DeployableAssembly</Assembly>
+            <Type>AcmeHoldings.NetAppONTAP.Cluster.Modules.DynamicDiskThresholdCD</Type>
+          </Managed>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputTypes>
+          <InputType>System!System.PropertyBagData</InputType>
+        </InputTypes>
+      </ConditionDetectionModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

@@ -1,0 +1,18 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Resources>
+    <DeployableAssembly ID="AcmeHoldings.NetAppONTAP.SDK.Library.log4net.DeployableAssembly"
+                        QualifiedName="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a"
+                        FileName="log4net.dll" Accessibility="Public" HasNullStream="false" />
+    <DeployableAssembly ID="AcmeHoldings.NetAppONTAP.SDK.Library.NetAppManage.DeployableAssembly"
+                        QualifiedName="netapp-manage, Version=5.2.0.0, Culture=neutral, PublicKeyToken=null"
+                        FileName="netapp-manage.dll" Accessibility="Public" HasNullStream="false">
+      <Dependency ID="AcmeHoldings.NetAppONTAP.SDK.Library.log4net.DeployableAssembly" />
+    </DeployableAssembly>
+    <DeployableAssembly ID="AcmeHoldings.NetAppONTAP.SDK.Library.ontap91.DeployableAssembly"
+                        QualifiedName="ontap-9-12-1, Version=1.21.0.0, Culture=neutral, PublicKeyToken=null"
+                        FileName="ontap-9-12-1.dll" Accessibility="Public" HasNullStream="false">
+      <Dependency ID="AcmeHoldings.NetAppONTAP.SDK.Library.log4net.DeployableAssembly" />
+      <Dependency ID="AcmeHoldings.NetAppONTAP.SDK.Library.NetAppManage.DeployableAssembly" />
+    </DeployableAssembly>
+  </Resources>
+</ManagementPackFragment>

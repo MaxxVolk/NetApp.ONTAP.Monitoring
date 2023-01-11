@@ -1,0 +1,334 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance6e6966ef64584dabab974d07aee03c69" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Volume.AvgLatency.PerformanceCollectionRule</Id>
+        <DisplayName>Volume Average Latency Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <ConditionDetectionType />
+        <DataSourceId>DS_ReadSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ObjectType&gt;volume&lt;/ObjectType&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;Counter&gt;avg_latency&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance3afce6edf2d748aab45eae5fdac3eede" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Volume.RWRatio.PerformanceCollectionRule</Id>
+        <DisplayName>Volume R/W Ratio % Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ObjectType&gt;volume&lt;/ObjectType&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.RWRate.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instanceebfc4b9319e343ba876dc85e78a300a4" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Volume.WriteOpsPerSec.PerformanceCollectionRule</Id>
+        <DisplayName>Volume Write Operations per Second Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ObjectType&gt;volume&lt;/ObjectType&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;Counter&gt;write_ops&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancef443c745e43544618830c8f0424f4a1a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Volume.ReadOpsPerSec.PerformanceCollectionRule</Id>
+        <DisplayName>Volume Read Operations per Second Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ObjectType&gt;volume&lt;/ObjectType&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;Counter&gt;read_ops&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance9a61079b396a4f8cb573946f1046607a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Volume.Throughput.PerformanceCollectionRule</Id>
+        <DisplayName>Volume IOPS per TB Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:00&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;ObjectType&gt;volume&lt;/ObjectType&gt;&lt;InstanceUuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/InstanceUuid$&lt;/InstanceUuid&gt;&lt;VolumeSizeMB&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/SizeMB$&lt;/VolumeSizeMB&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.Throughput.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancee2db33e67d6c45d3bec72aa7c8ed1c4b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Volume.SnapshotReserverFree.CollectionRule</Id>
+        <DisplayName>Volume Snapshot Reserver Free Percent Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_VolumeSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_PercentageSnapshotReserveFree&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance51a31cc11b504359ba6e55717cb098e7" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Volume.PercentFree.CollectionRule</Id>
+        <DisplayName>Volume Logical Usage Free Percent Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_VolumeSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_PercentageSizeFree&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance43cbf28ffdec46ce8eada560e8c17454" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Volume.SISPercentSaved.CollectionRule</Id>
+        <DisplayName>Volume SIS Percent Saved Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_VolumeSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_PercentageTotalSpaceSaved&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance8d5d9f0835384d709dc1ec7af881e499" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Volume.PhysicalPercentFree.CollectionRule</Id>
+        <DisplayName>Volume Physical Usage Free Percent Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_VolumeSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_PhysicalFreePercent&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancea7e15836198243a5b0d6d02de7aef7da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Aggregate.MBFree.CollectionRule</Id>
+        <DisplayName>Aggregate Usage Free MB Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_AggregateSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_FreeMB&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance09582e8862674484908b6b98a632a93f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomRule" Version="1.0.0.0">
+      <CustomRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Performance.CacheRefresh.Rule</Id>
+        <DisplayName>Performance Collector Cache Refresh Rule</DisplayName>
+        <Description>Central workflow to read performance data for all performance collection rules. If the rule is disabled, no performance data is collected.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Cluster.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <DataSources>
+          <RuleDataSourceItem>
+            <DataSourceId>DS_Schedule</DataSourceId>
+            <DataSourceConfig>&lt;IntervalSeconds&gt;100&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;</DataSourceConfig>
+            <DataSourceType>System!System.SimpleScheduler</DataSourceType>
+          </RuleDataSourceItem>
+        </DataSources>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <WriteActions>
+          <RuleWriteActionItem>
+            <WriteActionId>WA_RefreshCache</WriteActionId>
+            <WriteActionConfig>&lt;ConnectionFQDN&gt;$Target/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</WriteActionConfig>
+            <WriteActionType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.CacheRefresh.WriteAction</WriteActionType>
+          </RuleWriteActionItem>
+        </WriteActions>
+      </CustomRuleConfig>
+    </Instance>
+    <Instance ID="Instancee01c42e354bb41afa807903520fc8abd" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Volume.MBFree.CollectionRule</Id>
+        <DisplayName>Volume Usage Free MB Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_VolumeSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Volume.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_FreeMB&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.VolumeSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance4ef8302ba95e46869b175265e172ed87" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Aggregate.DiskCount.CollectionRule</Id>
+        <DisplayName>Aggregate Disk Count Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_AggregateSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_DiskCount&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance5bd13dcafb1047759077c3c38a357f85" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Aggregate.PercentFree.CollectionRule</Id>
+        <DisplayName>Aggregate Usage Free Percent Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_AggregateSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_PercentageSizeFree&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance43ce25d2c38f4169bfbbf3e5e8cadff9" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Aggregate.FilesTotal.CollectionRule</Id>
+        <DisplayName>Aggregate Total Files Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_AggregateSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_FilesTotal&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance7c356bbfa7ae47e89f832cc7afe5cd5e" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Aggregate.FlexVolCount.CollectionRule</Id>
+        <DisplayName>Aggregate Volume Count Performance Collection Rule</DisplayName>
+        <Description>Description for the new performance collection rule.</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS_AggregateSample</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:02&lt;/SyncTime&gt;&lt;ConnectionFQDN&gt;$Target/Host/Host/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"]/ConnectionFQDN$&lt;/ConnectionFQDN&gt;&lt;Uuid&gt;$Target/Property[Type="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Aggregate.Class"]/Uuid$&lt;/Uuid&gt;&lt;CacheTimeout&gt;300&lt;/CacheTimeout&gt;&lt;Counter&gt;PerfValue_FlexvolCount&lt;/Counter&gt;&lt;username&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/UserName$&lt;/username&gt;&lt;password&gt;$RunAs[Name="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference"]/Password$&lt;/password&gt;</DataSourceConfig>
+        <DataSourceType>AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Performance.AggrSize.DataSource</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

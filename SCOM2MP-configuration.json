@@ -1,0 +1,19 @@
+{
+  "SourceManagementPackPath": "AcmeHoldings.NetAppONTAP.Cluster.Monitoring\\bin\\Release\\AcmeHoldings.NetAppONTAP.Cluster.Monitoring.mp",
+  "GlobalSetup": {
+    "PrefixToRemove": "AcmeHoldings.NetAppONTAP.Cluster.Monitoring.",
+    "ReferenceMPFolders": [ "C:\\Program Files (x86)\\System Center Visual Studio 2022 Authoring Extensions\\References\\OM2012R2" ]
+  },
+  "Actions": {
+    "GenerateClassID": true,
+    "GenerateDiscoveryAdapter": false,
+    "GenerateRelationshipID": true
+  },
+  "ActionSettings": {
+    "IDSettings": {
+      "ClassName": "naID",
+      "FileName": "AcmeHoldings.NetAppONTAP.Cluster.Modules\\naID.cs",
+      "Namespace": "AcmeHoldings.NetAppONTAP.Cluster.Modules"
+    }
+  }
+}

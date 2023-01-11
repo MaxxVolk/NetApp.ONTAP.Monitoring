@@ -1,0 +1,33 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <SecureReferences>
+      <SecureReference ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference" Accessibility="Public" Context="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Seed.Class"/>
+    </SecureReferences>
+  </TypeDefinitions>
+  <Presentation>
+    <Folders>
+      <Folder ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Root.Folder" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+      <Folder ID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Inventory.Folder" Accessibility="Public" ParentFolder="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Root.Folder" />
+    </Folders>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring">
+          <Name>Acme Holdings NetApp ONTAP Cluster Monitoring</Name>
+          <Description>AcmeHoldings.NetAppONTAP.Cluster.Monitoring</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Appliance.SecureReference">
+          <Name>Data ONTAP Cluster Appliance Credentials</Name>
+          <Description>NetApp ONTAP Cluster WSDL API Credentials to communicate with appliances. Use only Basic type of accounts. Use @ to separate domain portion of the name.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Root.Folder">
+          <Name>ONTAP Cluster</Name>
+        </DisplayString>
+        <DisplayString ElementID="AcmeHoldings.NetAppONTAP.Cluster.Monitoring.Inventory.Folder">
+          <Name>Component Inventory</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

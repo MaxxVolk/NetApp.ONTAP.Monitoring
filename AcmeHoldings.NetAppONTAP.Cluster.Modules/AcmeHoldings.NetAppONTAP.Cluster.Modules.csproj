@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBE2CD04-CC95-46AE-A2E3-C81FC200D801}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AcmeHoldings.NetAppONTAP.Cluster.Modules</RootNamespace>
+    <AssemblyName>AcmeHoldings.NetAppONTAP.Cluster.Modules</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\.key\AcmeHoldings.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\3rd Party Libraries\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EnterpriseManagement.HealthService">
+      <HintPath>..\3rd Party Libraries\Microsoft.EnterpriseManagement.HealthService.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EnterpriseManagement.Modules.DataTypes">
+      <HintPath>..\3rd Party Libraries\Microsoft.EnterpriseManagement.Modules.DataTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Mom.Modules.DataTypes">
+      <HintPath>..\3rd Party Libraries\Microsoft.Mom.Modules.DataTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="netapp-manage">
+      <HintPath>..\3rd Party Libraries\netapp-manage.dll</HintPath>
+    </Reference>
+    <Reference Include="ontap-9-12-1">
+      <HintPath>..\3rd Party Libraries\ontap-9-12-1.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aggregate\AggregateDiscovery.cs" />
+    <Compile Include="ClusterAndNodes\ClusterAndNodeDiscovery.cs" />
+    <Compile Include="ClusterAndNodes\StorePoolExhaustProbeAction.cs" />
+    <Compile Include="LibraryInit.cs" />
+    <Compile Include="LUN\LUNStateProbeAction.cs" />
+    <Compile Include="naID.cs" />
+    <Compile Include="PerformanceCollector\AggrSpaceProbeAction.cs" />
+    <Compile Include="PerformanceCollector\LUNSpaceProbeAction.cs" />
+    <Compile Include="PerformanceCollector\PerfCollectionWriteAction.cs" />
+    <Compile Include="PerformanceCollector\PerfCollectionProbeAction.cs" />
+    <Compile Include="PerformanceCollector\SelfHealthProbeActions.cs" />
+    <Compile Include="PerformanceCollector\SyntheticPerfProbeAction.cs" />
+    <Compile Include="PerformanceCollector\VolumeSpaceProbeAction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Special\DynamicDiskThresholdCD.cs" />
+    <Compile Include="SVMAndVolume\SVMAndVolumeDiscovery.cs" />
+    <Compile Include="SVMAndVolume\VolumeSLAMonitor.cs" />
+    <Compile Include="SVMAndVolume\VolumeStateProbeAction.cs" />
+    <Compile Include="Helpers\HistoricalQueue.cs" />
+    <Compile Include="Helpers\ONTAPClusterObjectStateCache.cs" />
+    <Compile Include="Helpers\ONTAPClusterPerformanceCollector.cs" />
+    <Compile Include="Helpers\ResultWrapper.cs" />
+    <Compile Include="Helpers\AcmeHoldings.Library.Common.cs" />
+    <Compile Include="Helpers\SCOMRHelper.cs" />
+    <Compile Include="Helpers\ServiceHelper.cs" />
+    <Compile Include="SystemId.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
