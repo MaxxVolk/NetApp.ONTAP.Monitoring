@@ -9,3 +9,5 @@ Please note, that you must obtain your own copy of NetApp SDK including PowerShe
 
 Also note, that library and MP signing key is missing from this repository, so you will have to create your own and put it into the '.key' folder in the root of the repo. 
 Also, you will need to change deployable assembly's public keys accordingly. 
+
+WARNING!!! With the new MP signing key, all property and class GUIDs will be invalidated. You will need to re-generate the ID classes from the new MP.
